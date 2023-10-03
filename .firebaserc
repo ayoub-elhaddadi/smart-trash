@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "new-smart-trash": {
+      "hosting": {
+        "smart-trash": [
+          "new-smart-trash"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "new-smart-trash"
+  }
+}
