@@ -1,0 +1,32 @@
+<div class="main-map">
+  <div class="limiter">
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table100">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">ID</th>
+                <th class="column2">Name</th>
+                <th class="column3">Latitude</th>
+                <th class="column4">Longitude</th>
+                <th class="column5">xPosition</th>
+                <th class="column6">yPosition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let trash of myTrashs">
+                <td class="column1">{{ trash.id }}</td>
+                <td class="column2">{{ trash.name }}</td>
+                <td class="column3">{{ trash.latitude }}</td>
+                <td class="column4">{{ trash.longitude }}</td>
+                <td class="column5">{{ trash.xPosition }}</td>
+                <td class="column6">{{ trash.yPosition }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
