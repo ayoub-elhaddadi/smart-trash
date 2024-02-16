@@ -11,9 +11,15 @@ import { SignInComponent } from "./pages/sign-in/sign-in.component";
 import { MapComponent } from "./pages/map/map.component";
 import { RoutingModule } from "./routes/route.module";
 import { GoogleMapsModule } from "@angular/google-maps";
+import { PoubellesComponent } from "./pages/poubelles/poubelles.component";
 
 @NgModule({
-  declarations: [AppComponent, SignInComponent, MapComponent],
+  declarations: [
+    AppComponent,
+    SignInComponent,
+    MapComponent,
+    PoubellesComponent,
+  ],
   imports: [
     BrowserModule,
     RoutingModule,

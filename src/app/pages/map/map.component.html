@@ -1,22 +1,55 @@
 <!-- google-maps-demo.component.html -->
-<google-map
-  height="100vh"
-  width="100vw"
+<!-- <google-map
+  height="80vh"
+  width="80vw"
   [center]="center"
   [zoom]="zoom"
   (mapClick)="moveMap($event)"
   (mapMousemove)="move($event)"
+  [options]="mapOptions"
 >
   <map-marker
     *ngFor="let fullTrashPosition of fullTrashPosition"
     [position]="fullTrashPosition"
     [options]="markerOptions"
   ></map-marker>
-</google-map>
+</google-map> -->
 
-<div>Latitude: {{ display?.lat }}</div>
-<div>Longitude: {{ display?.lng }}</div>
+<!-- google-maps-demo.component.html -->
+<header>
+  <h1>Poubelle Intelligente</h1>
+</header>
 
+<nav>
+  <!-- Mettez vos liens de menu ici -->
+  <a href="/">Carte</a>
+  <a href="/poubelles">Poubelles</a>
+</nav>
+
+<!-- Contenu de la carte Google Maps -->
+<main class="container">
+  <google-map
+    class="carte"
+    height="75vh"
+    width="80vw"
+    [center]="center"
+    [zoom]="zoom"
+    (mapClick)="moveMap($event)"
+    (mapMousemove)="move($event)"
+    [options]="mapOptions"
+  >
+    <map-marker
+      *ngFor="let fullTrashPosition of fullTrashPosition"
+      [position]="fullTrashPosition"
+      [options]="markerOptions"
+    ></map-marker>
+  </google-map>
+</main>
+<footer>
+  <p>&copy; 2024 Poubelle Intelligente . Tous droits réservés.</p>
+</footer>
+
+<!-- 
 <div *ngFor="let trash of myTrashs">
   <hr />
   <br />
@@ -25,4 +58,4 @@
   <p>Name : {{ trash.name }}</p>
   <p>Longitude: {{ trash.longitude }}</p>
   <p>Latitude : {{ trash.latitude }}</p>
-</div>
+</div> -->

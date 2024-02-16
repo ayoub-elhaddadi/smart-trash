@@ -1,0 +1,31 @@
+<header>
+  <h1>Poubelle Intelligente</h1>
+</header>
+
+<nav>
+  <!-- Mettez vos liens de menu ici -->
+  <a href="/">Carte</a>
+  <a href="/poubelles">Poubelles</a>
+</nav>
+
+<main>
+  <div class="container">
+    <h1>Liste de Poubelles</h1>
+    <div class="poubelle">
+      <div class="distance">Nom</div>
+      <div class="distance">Distance</div>
+      <div></div>
+    </div>
+    <div class="poubelle">
+      <div class="distance">{{ trash.name }}</div>
+      <div class="distance">{{ trash.distance }} cm</div>
+      <div class="status" [class.full]="trash.distance < 4">
+        {{ trash.distance < 4 ? "Pleine" : "Non pleine" }}
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2024 Poubelle Intelligente . Tous droits réservés.</p>
+</footer>

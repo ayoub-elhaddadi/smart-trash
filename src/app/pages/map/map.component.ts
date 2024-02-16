@@ -1,10 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  AngularFireDatabase,
-  AngularFireList,
-} from "@angular/fire/compat/database";
-import { map } from "rxjs";
-import { Trash } from "src/app/models";
+import { AngularFireDatabase } from "@angular/fire/compat/database";
+import { Observable, map } from "rxjs";
 
 @Component({
   selector: "app-map",
@@ -12,46 +8,39 @@ import { Trash } from "src/app/models";
   styleUrls: ["./map.component.css"],
 })
 export class MapComponent implements OnInit {
-  private trashRef: AngularFireList<Trash[]>;
-  public myTrashs: Trash[] = [];
+  trashData: Observable<any> | undefined;
   display: any;
-  zoom: number = 4;
-  center: google.maps.LatLngLiteral = {
-    lat: 24,
-    lng: 12,
-  };
+  zoom: number = 12;
+  center: google.maps.LatLngLiteral = { lat: 50.9513, lng: 1.8587 };
+  fullTrashPosition: google.maps.LatLngLiteral[] = [];
   markerOptions: google.maps.MarkerOptions = {
     draggable: false,
   };
-  fullTrashPosition: google.maps.LatLngLiteral[] = [];
+  mapOptions = {
+    restriction: {
+      latLngBounds: {
+        north: 50.9795,
+        south: 50.9418,
+        west: 1.8242,
+        east: 1.8948,
+      },
+      strictBounds: true,
+    },
+  };
 
   constructor(db: AngularFireDatabase) {
-    this.trashRef = db.list<Trash[]>("/trash");
+    this.trashData = db.object("trash_1").valueChanges();
   }
 
   ngOnInit() {
-    this.trashRef
-      .snapshotChanges()
-      .pipe(
-        map((changes) =>
-          changes.map((c) => {
-            return { ...c.payload.val() } as Trash;
-          })
-        )
-      )
-      .subscribe((data) => {
-        this.myTrashs = data;
-
-        const positions: google.maps.LatLngLiteral[] = [];
-
-        this.myTrashs.forEach((t) => {
-          const lat = t.latitude;
-          const lng = t.longitude;
-          if (lat && lng) positions.push({ lat: lat, lng: lng });
+    this.trashData?.subscribe((data) => {
+      this.fullTrashPosition = [];
+      data.distance < 4 &&
+        this.fullTrashPosition.push({
+          lat: data.latitude,
+          lng: data.longitude,
         });
-
-        this.fullTrashPosition = positions;
-      });
+    });
   }
 
   moveMap(event: google.maps.MapMouseEvent) {
